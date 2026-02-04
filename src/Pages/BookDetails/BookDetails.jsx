@@ -2,6 +2,8 @@ import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import { addToStoredDb, addToWishStoredDb } from '../../utility/adToDb';
 import bannerbook from '../../assets/bannerbook.png';
+
+
 const BookDetails = () => {
     const {id}=useParams();
     //console.log(typeof(id));
@@ -19,6 +21,7 @@ const BookDetails = () => {
 
     const handleWishList=(id)=>{
         addToWishStoredDb(id);
+       
     }
     return (
     //     <div className='w-2/3 mx-auto'>

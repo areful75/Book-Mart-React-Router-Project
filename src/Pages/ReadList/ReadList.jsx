@@ -9,6 +9,7 @@ const ReadList = () => {
 
     const [readlist,setReadlist]=useState([]);
     const [wishlist,setWishlist]=useState([]);
+    const [sort,setSort]=useState('');
     
      const data=useLoaderData();
 
@@ -35,10 +36,38 @@ const ReadList = () => {
     }, [])
 
     //console.log(readlist);
-    //console.log(wishlist);  
+    //console.log(wishlist); 
+    const handleSort=(type)=>{
+        setSort(type);
+        if(type ==='Pages'){
+            const sortedByPages=[...readlist].sort((a,b)=>a.totalPages - b.totalPages);
+            setReadlist(sortedByPages);
+        }
+        else if(type==='Rating'){
+            const sortedByRating=[...readlist].sort((a,b)=>b.rating - a.rating);
+            setReadlist(sortedByRating);
+        }
+    } 
     return (
         <div>
-              <div className="card bg-base-300 rounded-box grid h-20 place-items-center font-bold text-3xl mb-10">Books</div>
+              <div className="card bg-base-300 rounded-box grid h-20 place-items-center font-bold text-3xl mb-6">Books</div>
+
+              {/* dropdown */}
+
+              
+
+<details className="dropdown flex justify-center mb-10">
+  <summary className="btn m-1">Sort By:{sort ?sort:''}</summary>
+  <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+    <li><a onClick={()=>{
+        handleSort('Pages');
+    }}>Pages</a></li>
+    <li><a onClick={()=>{
+        handleSort('Rating');
+    }}>Rating</a></li>
+  </ul>
+</details>
+
 
 
             <Tabs>
